@@ -189,7 +189,7 @@ We define the color and fill by mapping aesthetics because they are linked to th
 
 And yet another way to visualize this relationship is using side-by-side box plots.
 
-```{r plastic_waste_per_cap-box}
+```{r eval=TRUE}
 ggplot(data = plastic_waste, 
        mapping = aes(x = continent, 
                      y = plastic_waste_per_cap)) +
@@ -198,19 +198,63 @@ ggplot(data = plastic_waste,
 
 1.  Convert your side-by-side box plots from the previous task to [violin plots](http://ggplot2.tidyverse.org/reference/geom_violin.html). What do the violin plots reveal that box plots do not? What features are apparent in the box plots but not in the violin plots?
 
+```{r eval=TRUE}
+
+ggplot(data = plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
+  geom_violin()
+```
+
+The violin plots more effectively show the density of the plastic waste per capita and makes apparent which continents have the most plastic waste per capita.  Meanwhile, the box plots more effectively show the outliers and median of plastic waste per capita for each continent.
+
 ```{marginfigure}
 **Remember:** We use `geom_point()` to make scatterplots.
 ```
 
 1.  Visualize the relationship between plastic waste per capita and mismanaged plastic waste per capita using a scatterplot.
     Describe the relationship.
+    
+```{r eval=TRUE}
+ggplot(data = plastic_waste,
+       mapping = aes(x = plastic_waste_per_cap,
+                      y = mismanaged_plastic_waste_per_cap)) +
+  geom_point()
+```
+
+The relationship between the plastic waste per capita and mismanaged plastic waste per capita is that most of the plastic waste is in all of the continents is mismanaged.
 
 2.  Colour the points in the scatterplot by continent.
     Does there seem to be any clear distinctions between continents with respect to how plastic waste per capita and mismanaged plastic waste per capita are associated?
+    
+```{r eval=TRUE}
+ggplot(data = plastic_waste,
+       mapping = aes(x = plastic_waste_per_cap,
+                     y = mismanaged_plastic_waste_per_cap,
+                     color = continent)) +
+  geom_point()
+```
+
+It seems as though nearly all of Africa's plastic waste per capita is unmanaged, while it varies in other countries. For example, in North America most waste is unmanaged, but there are outliers that show that some waste is managed.
 
 3.  Visualize the relationship between plastic waste per capita and total population as well as plastic waste per capita and coastal population.
     You will need to make two separate plots.
     Do either of these pairs of variables appear to be more strongly linearly associated?
+    
+```{r eval=TRUE}
+ggplot(data = plastic_waste,
+       mapping = aes(x = total_pop,
+                     y = plastic_waste_per_cap,)) +
+  geom_point()
+
+```
+
+```{r eval=TRUE}
+ggplot(data = plastic_waste,
+       mapping = aes(x = coastal_pop,
+                     y = plastic_waste_per_cap,)) +
+  geom_point()
+```
+
+It looks like, out of the total population, the coastal population has less plastic waste per capita and represents some of the outliers on the total population scatterplot.
 
 🧶 ✅ ⬆️ *Now is another good time to knit your document and commit and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
